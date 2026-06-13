@@ -464,3 +464,30 @@ ul {
     width: 100%;
   }
 }
+/* ---------- GITHUB REPOS SECTION ---------- */
+.github-section {
+  margin-top: var(--s64);
+  padding-top: var(--s48);
+  border-top: 1px solid var(--border);
+}
+
+.github-header {
+  margin-bottom: var(--s32);
+}
+
+.github-title {
+  font-size: var(--h2);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: var(--s8) 0 var(--s8);
+}
+
+.github-subtitle {
+  color: var(--ink-muted);
+  font-size: var(--cap);
+}
+
+.loading-text {
+  color: var(--ink-muted);
+  font-style: italic;
+}
