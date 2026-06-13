@@ -73,3 +73,37 @@ const observer = new IntersectionObserver((entries) => {
 
 // Tell the observer to watch each reveal element.
 revealItems.forEach((item) => observer.observe(item));
+/* ---------- 4. GITHUB REPOS AUTO-LOADER ---------- */
+async function loadGithubProjects() {
+  const grid = document.getElementById('github-projects');
+  if (!grid) return;
+
+  try {
+    const response = await fetch(
+      'https://raw.githubusercontent.com/jyothikashiju4-art/pulse_bot/main/projects.json'
+    );
+    const projects = await response.json();
+
+    grid.innerHTML = '';
+    projects.slice(0, 6).forEach(project => {
+      const card = document.createElement('article');
+      card.className = 'card reveal';
+      card.innerHTML = `
+        <span class="card-tag">${project.language || 'Code'}</span>
+        <h3 class="card-title">${project.name}</h3>
+        <p class="card-desc">${project.description}</p>
+        <div class="card-meta">
+          <span class="chip">⭐ ${project.stars}</span>
+          <span class="chip">📅 ${project.updated}</span>
+        </div>
+        <a href="${project.url}" target="_blank" rel="noopener" class="card-link">View on GitHub ↗</a>
+      `;
+      grid.appendChild(card);
+      observer.observe(card);
+    });
+  } catch (e) {
+    grid.innerHTML = '<p style="color: var(--ink-muted);">Could not load repos right now.</p>';
+  }
+}
+
+loadGithubProjects();
